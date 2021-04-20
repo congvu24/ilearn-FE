@@ -23,7 +23,7 @@ export default function UserLogin() {
           </div>
         </div>
 
-        <div class=" md:w-2/6 overflow-hidden bg-gray-100">
+        <div class="w-full md:w-2/6 overflow-hidden bg-gray-100">
           <div className="w-full h-full text-center flex items-center justify-center flex-col">
             <div>
               <Link to="/">
@@ -62,6 +62,7 @@ export default function UserLogin() {
             </div>
           </div>
         </div>
+      
       </div>
     </div>
   );

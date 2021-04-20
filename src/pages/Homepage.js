@@ -26,7 +26,7 @@ export default function Homepage() {
           </h1>
           <div className="flex items-center w-full max-w-xl mx-auto h-14 bg-white rounded-md justify-between">
             <input
-              className="w-5/6 mx-2 h-full px-4 text-xl font-light"
+              className="w-5/6 mx-2 h-full py-2 px-4 text-xl font-light"
               placeholder="Enter your key words"
             />
             <button className="py-2 px-4 text-gray-500 h-full">
@@ -68,7 +68,7 @@ export default function Homepage() {
         <h3 className="text-xl my-2 font-semibold mx-2 md:mx-0">
           Lasted classes
         </h3>
-        <Row gutter={24}>
+        <Row>
           <ClassCard />
           <ClassCard />
           <ClassCard />

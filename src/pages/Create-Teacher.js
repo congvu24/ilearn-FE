@@ -35,8 +35,8 @@ export default function CreateTeacher() {
         </p>
         {/* <RegisterAccount /> */}
         {/* <RegisterZoom /> */}
-        {/* <RegisterProfile /> */}
-        <RegisterDone />
+        <RegisterProfile />
+        {/* <RegisterDone /> */}
         <div className="my-2">
           <Steps responsive={true}>
             <Step status="finish" title="Account" icon={<KeyOutlined className="text-sm md:text-base" />} />
