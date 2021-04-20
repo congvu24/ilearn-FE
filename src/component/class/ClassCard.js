@@ -29,15 +29,15 @@ export default function ClassCard() {
         </div>
 
         <div class="md:w-4/6 overflow-hidden p-2 md:p-4">
-          <p className="font-semibold text-gray-700 text-xl md:text-2xl text-left">
+          <p className="font-semibold text-gray-800 text-xl md:text-2xl text-left">
             Javascript Full Course In 1 Hour
           </p>
           <p className="mb-1">
-            by <span className="font-semibold text-base ">Cong Vu</span>
+            by <span className="font-semibold text-base text-gray-600">Cong Vu</span>
           </p>
           <p className="font-semibold text-green-600">Free to join</p>
           <p>
-            <span className="font-semibold">8PM - 9PM, Sunday 19th</span>
+            <span className="font-semibold text-gray-600">8PM - 9PM, Sunday 19th</span>
           </p>
           <p className="mb-2 flex flex-wrap">
             <span className="mr-2 font-semibold text-gray-600">
