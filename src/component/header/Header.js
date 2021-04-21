@@ -50,7 +50,7 @@ export default function Header() {
         </Link>
         <Link to="/dasboard">
           <button className="px-5 py-1 text-white text-xl font-normal bg-green-500 rounded mx-2">
-            Create
+            New Class
           </button>
         </Link>
       </div>
