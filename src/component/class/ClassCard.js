@@ -54,7 +54,7 @@ export default function ClassCard() {
             libero tenetur esse eius officiis animi sequi, tempore dolorum quas.
           </p>
           <div>
-            <Link to="/detail">
+            <Link to="/detail/asd">
               <button className="py-1 px-3 bg-green-300 text-white rounded font-semibold ml-auto block">
                 Detail
               </button>

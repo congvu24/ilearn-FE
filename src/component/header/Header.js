@@ -48,9 +48,9 @@ export default function Header() {
             Login
           </button>
         </Link>
-        <Link to="/register">
+        <Link to="/dasboard">
           <button className="px-5 py-1 text-white text-xl font-normal bg-green-500 rounded mx-2">
-            Register
+            Create
           </button>
         </Link>
       </div>
