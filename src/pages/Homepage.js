@@ -1,5 +1,6 @@
 import { Affix, Col, Divider, Row } from "antd";
 import React from "react";
+import { Link } from "react-router-dom";
 import ClassCard from "../component/class/ClassCard";
 import Footer from "../component/footer/Footer";
 import Header from "../component/header/Header";
@@ -24,9 +25,9 @@ export default function Homepage() {
             Thousands of free classes are waiting for you to join on{" "}
             <span className="text-blue-500 z-10">i</span>Learn.
           </h1>
-          <div className="flex items-center w-full max-w-xl mx-auto h-14 bg-white rounded-md justify-between">
+          <div className="flex items-center w-full max-w-xl mx-auto bg-white rounded-md justify-between">
             <input
-              className="w-5/6 mx-2 h-full py-2 px-4 text-xl font-light"
+              className="w-5/6 mx-2 h-full py-3 px-4 text-xl font-light"
               placeholder="Enter your key words"
             />
             <button className="py-2 px-4 text-gray-500 h-full">
@@ -50,18 +51,26 @@ export default function Homepage() {
       </div>
       <div className="flex items-center justify-center">
         <ul className="flex items-center justify-center p-0 border-b-2 border-gray-100 w-full">
-          <li className="px-4 py-4 border-b-2 border-blue-500 md:text-xl font-semibold text-blue-500">
-            Lasted
-          </li>
-          <li className="px-4 py-4 border-b-2 border-transparent md:text-xl font-semibold text-gray-600">
-            On stream
-          </li>
-          <li className="px-4 py-4 border-b-2 border-transparent md:text-xl font-semibold text-gray-600">
-            In Comming
-          </li>
-          <li className="px-4 py-4 border-b-2 border-transparent md:text-xl font-semibold text-gray-600">
-            Finish
-          </li>
+          <Link to="/">
+            <li className="hover:text-blue-500 px-4 py-4 border-b-2 border-blue-500 md:text-xl font-semibold text-blue-500">
+              Lasted
+            </li>
+          </Link>
+          <Link to="/live">
+            <li className="hover:text-blue-500 px-4 py-4 border-b-2 border-transparent md:text-xl font-semibold text-gray-600">
+              On stream
+            </li>
+          </Link>
+          <Link to="/comming">
+            <li className="hover:text-blue-500 px-4 py-4 border-b-2 border-transparent md:text-xl font-semibold text-gray-600">
+              In Comming
+            </li>
+          </Link>
+          <Link to="/finish">
+            <li className="hover:text-blue-500 px-4 py-4 border-b-2 border-transparent md:text-xl font-semibold text-gray-600">
+              Finish
+            </li>
+          </Link>
         </ul>
       </div>
       <div className="container mx-auto xl:px-40 py-4 md:py-8">

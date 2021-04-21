@@ -11,7 +11,7 @@ export default function Homepage() {
   return (
     <div>
       <div
-        style={{ maxHeight: "60vh" }}
+        style={{ maxHeight: "45vh" }}
         className="hero w-full h-screen  relative overflow-hidden"
       >
         <div className="w-full h-full flex overflow-hidden items-center justify-center absolute top-0 left-0 blur-md filter">

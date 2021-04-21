@@ -1,6 +1,7 @@
 import { Col, Divider, Row } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
+import SmallHeader from "../component/header/SmallHeader";
 
 export default function UserLogin() {
   return (
@@ -24,6 +25,7 @@ export default function UserLogin() {
         </div>
 
         <div class="w-full md:w-2/6 overflow-hidden bg-gray-100">
+          <SmallHeader />
           <div className="w-full h-full text-center flex items-center justify-center flex-col">
             <div>
               <Link to="/">

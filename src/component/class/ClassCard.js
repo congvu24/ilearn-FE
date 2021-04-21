@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function ClassCard() {
   return (
     <Col xs={24} md={12}>
-      <div class="flex flex-wrap overflow-hidden rounded border-2 border-gray-100 mb-4 mx-2 md:mx-0 shadow">
+      <div class="flex flex-wrap overflow-hidden rounded border-2 border-gray-100 mb-4 mx-2 md:mx-2 shadow">
         <div class="w-2/6 overflow-hidden hidden md:block">
           <div
             style={{ maxHeight: 250 }}
