@@ -71,7 +71,7 @@ export default function Homepage() {
         </div>
         <div className="transform md:-translate-y-40 -translate-y-20 flex items-center md:justify-end justify-center">
           <button className="px-4 mr-2 py-2 uppercase text-green-500 rounded border border-green-500 font-semibold block">
-            79 paticipants
+            79 participants
           </button>
           <button className="px-4 mr-2 py-2 uppercase text-white rounded bg-green-400 font-semibold block">
             JOIN NOW
