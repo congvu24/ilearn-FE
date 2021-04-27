@@ -5,6 +5,13 @@ const defaultState = {
   user: "",
 };
 
-const reducer = handleActions({}, defaultState);
+const reducer = handleActions(
+  {
+    [constants.LOGIN]: (state, action) => {
+      return { ...state, user: action.payload };
+    },
+  },
+  defaultState
+);
 
 export default reducer;

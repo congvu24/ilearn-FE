@@ -59,14 +59,19 @@ export default function TeacherLogin() {
               </p>
               <div className="max-w-sm p-4 mx-auto">
                 <Form onFinish={onFinish}>
+                  <p className="text-left text-gray-500 my-2">Username:</p>
                   <Form.Item name="username" rules={[{ required: true }]}>
                     <input
+                      autoComplete={false}
                       className="w-full p-3 px-4 rounded max-auto block font-semibold text-base border-l-4 border-blue-500"
                       placeholder="EMAIL"
                     />
                   </Form.Item>
+                  <p className="text-left text-gray-500 my-2">Password:</p>
+
                   <Form.Item name="password" rules={[{ required: true }]}>
                     <input
+                      autoComplete={false}
                       type="password"
                       className="w-full p-3 px-4 rounded max-auto block  font-semibold text-base border-l-4 border-blue-500"
                       placeholder="PASSWORD"

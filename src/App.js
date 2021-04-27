@@ -2,6 +2,7 @@ import React from "react";
 import { connect, Provider } from "react-redux";
 import Router from "./Route";
 import store from "./redux/store";
+import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
 function App() {
   return (

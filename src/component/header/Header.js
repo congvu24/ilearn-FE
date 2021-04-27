@@ -1,9 +1,10 @@
 import { Affix, Dropdown } from "antd";
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import DropdownMenu from "../menu/DropdownMenu";
 
-export default function Header() {
+function Header({ user, ...props }) {
   const [isStick, setIsStick] = useState(false);
 
   return (
@@ -12,7 +13,7 @@ export default function Header() {
       style={{ zIndex: 10000000000 }}
       className={`${
         isStick ? "bg-white border-b relative" : ""
-      } py-2 px-4 flex items-center z-10 relative`}
+      } py-4 px-4 flex items-center z-10 relative`}
     >
       <div className="flex items-center">
         {/* <div className="w-10 h-10 overflow-hidden flex items-center justify-center">
@@ -28,7 +29,7 @@ export default function Header() {
           </h2>
         </Link>
       </div>
-      <ul className="hidden md:flex ml-auto items-center justify-center mr-8">
+      <ul className="hidden md:flex ml-auto items-center justify-center mr-4">
         <Link to="/">
           <li className="mx-2 font-normal text-xl text-white">Home</li>
         </Link>
@@ -43,16 +44,34 @@ export default function Header() {
         </Link>
       </ul>
       <div className="hidden md:flex items-center justify-center">
-        <Link to="/login">
-          <button className="px-5 py-1 text-white text-xl font-normal border border-white rounded mx-2">
-            Login
-          </button>
-        </Link>
-        <Link to="/dasboard">
-          <button className="px-5 py-1 text-white text-xl font-normal bg-green-500 rounded mx-2 border border-green-500">
-            New Class
-          </button>
-        </Link>
+        {!user && (
+          <Link to="/login">
+            <button className="px-5 py-1 text-white text-xl font-normal border border-white rounded mx-2">
+              Login
+            </button>
+          </Link>
+        )}
+        {!user && (
+          <Link to="/register">
+            <button className="px-5 py-1 text-white text-xl font-normal bg-green-500 rounded mx-2 border border-green-500">
+              Register
+            </button>
+          </Link>
+        )}
+        {user && user.role == "teacher" && (
+          <Link to="/dashboard">
+            <button className="px-5 py-1 text-white text-xl font-normal bg-green-500 rounded mx-2 border border-green-500">
+              Dashboard
+            </button>
+          </Link>
+        )}
+        {user && user.role == "student" && (
+          <Link to="/profile">
+            <button className="px-5 py-1 text-white text-xl font-normal bg-green-500 rounded mx-2 border border-green-500">
+              Profile
+            </button>
+          </Link>
+        )}
       </div>
       <div className="md:hidden ml-auto">
         <Dropdown
@@ -69,3 +88,11 @@ export default function Header() {
     // </Affix>
   );
 }
+
+const mapStateToProps = (state) => ({
+  user: state.user.user,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
