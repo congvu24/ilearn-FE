@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ClassCard from "../component/class/ClassCard";
 import Footer from "../component/footer/Footer";
+import HomeSearch from "../component/form/Home-Search";
 import Header from "../component/header/Header";
 
 export default function Homepage() {
@@ -25,18 +26,10 @@ export default function Homepage() {
             Thousands of free classes are waiting for you to join on{" "}
             <span className="text-blue-500 z-10">i</span>Learn.
           </h1>
-          <div className="flex items-center w-full max-w-xl mx-auto bg-white rounded-md justify-between">
-            <input
-              className="w-5/6 mx-2 h-full py-3 px-4 text-xl font-light"
-              placeholder="Enter your key words"
-            />
-            <button className="py-2 px-4 text-gray-500 h-full">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
+          <HomeSearch />
           <div className="flex items-center w-full max-w-xl mx-auto my-4 flex-wrap text-left">
             <p className="text-white font-semibold">Suggested:</p>{" "}
-            <p>
+            <p className="flex flex-wrap">
               <span className="text-gray-200 mx-1 font-normal">
                 Javascript,
               </span>

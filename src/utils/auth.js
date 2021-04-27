@@ -57,5 +57,5 @@ export const logout = () => {
 
 export const login = ({ token }) => {
   cookie.set("userToken", token, { expires: 1 });
-  window.location.href = "/dashboard";
+  window.location.href = "/";
 };

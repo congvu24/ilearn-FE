@@ -1,9 +1,22 @@
 import { Col, Divider, Form, Row } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SmallHeader from "../component/header/SmallHeader";
+import handleErrorApi from "../utils/handleErrorApi";
 
 export default function TeacherLogin() {
+  const [isLoading, setLoading] = useState(false);
+
+  const onFinish = async (values) => {
+    try {
+      setLoading(true);
+      console.log(values);
+    } catch (err) {
+      setLoading(false);
+      handleErrorApi(err);
+    }
+  };
+
   return (
     <div className="max-w-screen min-h-screen flex flex-col ">
       <div class="flex flex-wrap overflow-hidden h-full flex-1">
@@ -45,14 +58,14 @@ export default function TeacherLogin() {
                 assumenda vitae provident!
               </p>
               <div className="max-w-sm p-4 mx-auto">
-                <Form>
-                  <Form.Item>
+                <Form onFinish={onFinish}>
+                  <Form.Item name="username" rules={[{ required: true }]}>
                     <input
                       className="w-full p-3 px-4 rounded max-auto block font-semibold text-base border-l-4 border-blue-500"
                       placeholder="EMAIL"
                     />
                   </Form.Item>
-                  <Form.Item>
+                  <Form.Item name="password" rules={[{ required: true }]}>
                     <input
                       type="password"
                       className="w-full p-3 px-4 rounded max-auto block  font-semibold text-base border-l-4 border-blue-500"

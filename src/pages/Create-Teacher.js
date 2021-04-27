@@ -1,5 +1,5 @@
 import { Col, Form, Row, Steps } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import {
   UserOutlined,
   SolutionOutlined,
@@ -17,6 +17,12 @@ import { Link } from "react-router-dom";
 
 const { Step } = Steps;
 export default function CreateTeacher() {
+  const [step, setStep] = useState(1);
+
+  const nextStep = () => {
+    setStep(step + 1);
+  };
+
   return (
     <div>
       <div className="p-4">
@@ -45,29 +51,31 @@ export default function CreateTeacher() {
             deleniti fuga perspiciatis, quia magni rerum tenetur assumenda vitae
             provident!
           </p>
-          {/* <RegisterAccount /> */}
-          {/* <RegisterZoom /> */}
-          <RegisterProfile />
-          {/* <RegisterDone /> */}
+
+          {step == 1 && <RegisterAccount nextStep={nextStep} />}
+          {step == 2 && <RegisterZoom nextStep={nextStep} />}
+          {step == 3 && <RegisterProfile nextStep={nextStep} />}
+          {step == 4 && <RegisterDone nextStep={nextStep} />}
+
           <div className="my-2">
             <Steps responsive={true}>
               <Step
-                status="finish"
+                status={step >= 1 ? "finish" : "wait"}
                 title="Account"
                 icon={<KeyOutlined className="text-sm md:text-base" />}
               />
               <Step
-                status="finish"
+                status={step >= 2 ? "finish" : "wait"}
                 title="Verification"
                 icon={<SolutionOutlined className="text-sm md:text-base" />}
               />
               <Step
-                status="process"
+                status={step >= 3 ? "finish" : "wait"}
                 title="Profile"
                 icon={<UserOutlined className="text-sm md:text-base" />}
               />
               <Step
-                status="wait"
+                status={step >= 4 ? "finish" : "wait"}
                 title="Done"
                 icon={<SmileOutlined className="text-sm md:text-base" />}
               />

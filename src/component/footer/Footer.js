@@ -11,8 +11,8 @@ export default function Footer() {
               <span className="text-blue-500">i</span>Learn
             </h2>
           </Link>
-          <p>© 2021 iLearn</p>
-          <p>Power by iHelloWorld</p>
+          <p className="ml-2">© 2021 iLearn</p>
+          <p className="ml-2">Power by iHelloWorld</p>
         </div>
 
         <ul className="flex md:ml-auto items-baseline justify-center h-full">

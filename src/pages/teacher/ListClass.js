@@ -10,17 +10,27 @@ export default function ListClass() {
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Age",
+      title: "Zoom ID",
       dataIndex: "age",
       key: "age",
     },
     {
-      title: "Address",
+      title: "Paticipants",
+      dataIndex: "age",
+      key: "age",
+    },
+    {
+      title: "Duration",
+      dataIndex: "age",
+      key: "age",
+    },
+    {
+      title: "Description",
       dataIndex: "address",
       key: "address",
     },
     {
-      title: "Tags",
+      title: "Category",
       key: "tags",
       dataIndex: "tags",
       render: (tags) => (
@@ -44,7 +54,7 @@ export default function ListClass() {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <a>Invite {record.name}</a>
+          <a>Hide</a>
           <a>Delete</a>
         </Space>
       ),

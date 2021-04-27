@@ -39,21 +39,26 @@ export default function CreateClass() {
 
   return (
     <div className="w-full mx-auto">
+      <h2 className="text-center text-2xl font-semibold">Create new class</h2>
+      <p className="text-center mb-8 text-gray-500">
+        Just create on{" "}
+        <b>
+          <span className="text-blue-500">i</span>Learn
+        </b>{" "}
+        and we setup all for you.
+      </p>
       <Form
         name="validate_other"
         {...formItemLayout}
         onFinish={onFinish}
         initialValues={{
-          "input-number": 3,
-          "checkbox-group": ["A", "B"],
-          rate: 3.5,
           is_free: true,
+          duration: 40,
         }}
       >
         <Form.Item
           name="name"
           label="Name"
-          hasFeedback
           rules={[{ required: true, message: "Please input the name!" }]}
         >
           <Input />
@@ -65,7 +70,7 @@ export default function CreateClass() {
           rules={[
             {
               required: true,
-              message: "Please select your favourite colors!",
+              message: "Please select category",
               type: "array",
             },
           ]}
@@ -77,22 +82,31 @@ export default function CreateClass() {
           </Select>
         </Form.Item>
 
-        <Form.Item label="Max participants">
-          <Form.Item name="input-number" noStyle>
+        <Form.Item label="Max participants" rules={[{ required: true }]}>
+          <Form.Item name="max_number" noStyle>
             <InputNumber min={1} max={100} defaultValue={50} />
           </Form.Item>
           <span className="ant-form-text"> people</span>
         </Form.Item>
 
-        <Form.Item name="is_free" label="Free to join" valuePropName="checked">
+        <Form.Item
+          rules={[{ required: true }]}
+          name="is_free"
+          label="Free to join"
+          valuePropName="checked"
+        >
           <Switch defaultChecked={true} />
         </Form.Item>
 
-        <Form.Item label="Start time">
+        <Form.Item name="start" rules={[{ required: true }]} label="Start time">
           <DatePicker showTime showSecond={false} />
         </Form.Item>
 
-        <Form.Item name="duration" label="Duration (minutes)">
+        <Form.Item
+          name="duration"
+          rules={[{ required: true }]}
+          label="Duration (minutes)"
+        >
           <Slider
             marks={{
               0: "0",
@@ -104,7 +118,11 @@ export default function CreateClass() {
             }}
           />
         </Form.Item>
-        <Form.Item name="description" label="Description">
+        <Form.Item
+          name="description"
+          rules={[{ required: true }]}
+          label="Description"
+        >
           <Input.TextArea />
         </Form.Item>
         <Form.Item label="Thumbnail">
@@ -131,7 +149,7 @@ export default function CreateClass() {
           <div
             contentEditable={true}
             style={{ minHeight: 200 }}
-            className="w-full bg-gray-100 p-4 mx-auto"
+            className="w-full bg-gray-50 border-dotted border p-4 mx-auto"
           ></div>
         </Form.Item>
         <Form.Item wrapperCol={{ span: 12, offset: 6 }}>

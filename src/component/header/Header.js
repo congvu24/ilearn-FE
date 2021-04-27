@@ -49,7 +49,7 @@ export default function Header() {
           </button>
         </Link>
         <Link to="/dasboard">
-          <button className="px-5 py-1 text-white text-xl font-normal bg-green-500 rounded mx-2">
+          <button className="px-5 py-1 text-white text-xl font-normal bg-green-500 rounded mx-2 border border-green-500">
             New Class
           </button>
         </Link>
@@ -60,7 +60,7 @@ export default function Header() {
           trigger={["click"]}
           placement="bottomLeft"
         >
-          <button className="text-white tex-xl  block">
+          <button className="text-white text-xl  block">
             <i class="fas fa-bars"></i>
           </button>
         </Dropdown>
