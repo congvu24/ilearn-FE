@@ -11,11 +11,13 @@ import ReactTypingEffect from "react-typing-effect";
 export default function Homepage() {
   const [isScroll, setScroll] = useState(false);
   const handleScroll = (e) => {
+    setScroll(true);
     if (window.scrollY > 5 && isScroll == false) {
-      setScroll(true);
-      // setTimeout(() => {
-      // window.scrollTo(0, 0);
-      // }, 0.25);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 0.25);
+    } else {
+      document.removeEventListener("scroll", handleScroll);
     }
   };
 
@@ -123,7 +125,7 @@ export default function Homepage() {
               // visibility: "hidden",
             },
           }}
-          transition={{ duration: 0.25, delay: 0.5 }}
+          transition={{ duration: 0.25, delay: 0.25 }}
           className="z-10 relative flex flex-col items-center justify-center
           h-5/6 p-4"
         >
