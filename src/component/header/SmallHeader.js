@@ -1,9 +1,11 @@
 import { Dropdown } from "antd";
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import MenuDrawer from "../drawer/MenuDrawer";
 import DropdownMenu from "../menu/DropdownMenu";
 
-export default function SmallHeader() {
+function SmallHeader({ user }) {
   return (
     <div className="flex items-center p-2">
       <div>
@@ -13,18 +15,17 @@ export default function SmallHeader() {
           </h2>
         </Link>
       </div>
-      <div className="ml-auto">
-        <Dropdown
-          overlay={DropdownMenu}
-          trigger={["click"]}
-          placement="bottomLeft"
-          
-        >
-          <button className="text-xl block text-gray-600">
-            <i class="fas fa-bars"></i>
-          </button>
-        </Dropdown>
+      <div className="ml-auto block md:hidden">
+        <MenuDrawer user={user} />
       </div>
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  user: state.user.user,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SmallHeader);

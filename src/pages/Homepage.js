@@ -12,7 +12,7 @@ export default function Homepage() {
   const [isScroll, setScroll] = useState(false);
   const handleScroll = (e) => {
     setScroll(true);
-    if (window.scrollY > 5 && isScroll == false) {
+    if (window.scrollY > 20 && isScroll == false) {
       setTimeout(() => {
         window.scrollTo(0, 0);
       }, 0.25);
@@ -107,7 +107,7 @@ export default function Homepage() {
           }}
           transition={{ duration: 0.25 }}
         >
-          <button className="scroll-down-arrow absolute bottom-20 inset-x-1/2 -translate-x-1/2 transform">
+          <button className="scroll-down-arrow absolute bottom-40 inset-x-1/2 -translate-x-1/2 transform">
             <i class="fas fa-angle-double-down text-4xl text-white"></i>
           </button>
         </motion.div>

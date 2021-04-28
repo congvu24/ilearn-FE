@@ -37,7 +37,7 @@ export default function TeacherLogin() {
           </div>
         </div>
 
-        <div class="w-full md:w-2/6 overflow-hidden bg-gray-100">
+        <div class="w-full md:w-2/6 overflow-hidden overflow-y-auto bg-gray-100">
           <SmallHeader />
           <div className="w-full h-full text-center flex items-center justify-center flex-col">
             <div>

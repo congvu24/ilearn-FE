@@ -3,7 +3,7 @@ import cookie from "js-cookie";
 import { offLoading, setLoading } from "../redux/actions/general";
 import store from "../redux/store";
 
-const BASE_API = "https://www.ilearn.vn/api/v1";
+const BASE_API = process.env.REACT_APP_BASE_HOST;
 
 export default async function callApi({ url, method, data, option }) {
   const token = cookie.get("userToken") ?? "";

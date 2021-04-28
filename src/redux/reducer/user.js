@@ -7,7 +7,7 @@ const defaultState = {
 
 const reducer = handleActions(
   {
-    [constants.LOGIN]: (state, action) => {
+    [constants.GET_INFO]: (state, action) => {
       return { ...state, user: action.payload };
     },
   },

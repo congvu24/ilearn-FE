@@ -66,7 +66,7 @@ export default function CreateTeacher() {
               />
               <Step
                 status={step >= 2 ? "finish" : "wait"}
-                title="Verification"
+                title="Connect Zoom"
                 icon={<SolutionOutlined className="text-sm md:text-base" />}
               />
               <Step

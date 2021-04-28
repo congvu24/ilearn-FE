@@ -2,6 +2,7 @@ import { Affix, Dropdown } from "antd";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import MenuDrawer from "../drawer/MenuDrawer";
 import DropdownMenu from "../menu/DropdownMenu";
 
 function Header({ user, ...props }) {
@@ -10,7 +11,7 @@ function Header({ user, ...props }) {
   return (
     // <Affix onChange={() => setIsStick(!isStick)}>
     <header
-      style={{ zIndex: 10000000000 }}
+      style={{ zIndex: 2 }}
       className={`${
         isStick ? "bg-white border-b relative" : ""
       } py-4 px-4 flex items-center z-10 relative`}
@@ -74,15 +75,16 @@ function Header({ user, ...props }) {
         )}
       </div>
       <div className="md:hidden ml-auto">
-        <Dropdown
-          overlay={DropdownMenu}
+        {/* <Dropdown
+          overlay={<DropdownMenu user={user} />}
           trigger={["click"]}
           placement="bottomLeft"
         >
           <button className="text-white text-xl  block">
             <i class="fas fa-bars"></i>
           </button>
-        </Dropdown>
+        </Dropdown> */}
+        <MenuDrawer user={user} />
       </div>
     </header>
     // </Affix>

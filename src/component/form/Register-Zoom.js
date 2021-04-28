@@ -18,47 +18,21 @@ export default function RegisterZoom({ nextStep }) {
   };
 
   return (
-    <div style={{ minHeight: 300 }} className="shadow p-4">
-      <p className="text-xl font-semibold my-2 text-gray-700">
-        Zoom information
-      </p>
-      <Form onFinish={onFinish}>
-        <Row gutter={12}>
-          <Col xs={12}>
-            <p className="font-semibold text-gray-700">Zoom's email: </p>
-            <Form.Item name="zoom" rules={[{ required: true }]}>
-              <input
-                className="bg-blue-50 w-full p-3 px-4 rounded max-auto block font-semibold text-base border-l-4 border-blue-500"
-                placeholder="acba@gmail.com"
-              />
-            </Form.Item>
-          </Col>
-          <Col xs={12}>
-            <p className="font-semibold text-gray-700">Zoom's password: </p>
-
-            <Form.Item name="password" rules={[{ required: true }]}>
-              <input
-                type="password"
-                className="bg-blue-50 w-full p-3 px-4 rounded max-auto block font-semibold text-base border-l-4 border-blue-500"
-                placeholder="Enter your password"
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Form.Item noStyle>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-40 mx-auto p-3 px-4 rounded-full max-auto bg-blue-500 block my-4 text-white font-semibold text-base uppercase self-end"
-          >
-            {isLoading ? (
-              <LoadingOutlined style={{ fontSize: 20 }} />
-            ) : (
-              "Connect"
-            )}
-          </button>
-        </Form.Item>
-      </Form>
+    <div style={{ minHeight: 300 }} className="shadow p-4 flex items-center justify-center flex-col">
+      <Form.Item noStyle>
+        <h2 className="text-center font-semibold text-xl text-gray-700">Connect to your Zoom account</h2>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className=" mx-auto p-3 px-4 rounded-full max-auto bg-blue-500 block my-4 text-white font-semibold text-base uppercase self-end"
+        >
+          {isLoading ? (
+            <LoadingOutlined style={{ fontSize: 20 }} />
+          ) : (
+            "Connect to Zoom"
+          )}
+        </button>
+      </Form.Item>
     </div>
   );
 }

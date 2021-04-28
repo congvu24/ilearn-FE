@@ -1,4 +1,4 @@
-import { Breadcrumb, Layout, Menu } from "antd";
+import { Breadcrumb, Dropdown, Layout, Menu } from "antd";
 import React from "react";
 import { Route } from "react-router";
 import { Link, Switch } from "react-router-dom";
@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import ListClass from "./teacher/ListClass";
 import CreateClass from "./teacher/CreateClass";
+import DropdownMenu from "../component/menu/DropdownMenu";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -48,12 +49,18 @@ export default function Dashboard() {
           style={{ padding: 0 }}
         >
           <div className="w-full h-full flex items-center justify-end">
-            <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center ml-0 mr-2">
-              <img
-                src="/img/default-avatar.jpg"
-                className="min-w-full min-h-full flex-shrink-0"
-              />
-            </div>
+            <Dropdown
+              overlay={DropdownMenu}
+              trigger={["click"]}
+              placement="bottomLeft"
+            >
+              <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center ml-0 mr-2">
+                <img
+                  src="/img/default-avatar.jpg"
+                  className="min-w-full min-h-full flex-shrink-0"
+                />
+              </div>
+            </Dropdown>
           </div>
         </Header>
         <Content style={{ margin: "24px 16px 0" }}>
