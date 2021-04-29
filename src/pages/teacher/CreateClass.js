@@ -21,6 +21,7 @@ import MdEditor from "../../component/form/MdEditor";
 import ImgCrop from "antd-img-crop";
 import { postCreateClass, postUploadImage } from "../../api/user";
 import handleErrorApi from "../../utils/handleErrorApi";
+import { useHistory } from "react-router";
 
 const { Option } = Select;
 
@@ -30,12 +31,9 @@ const formItemLayout = {
 };
 
 export default function CreateClass() {
-  const [thumbnail, setThumbnail] = useState(
-    "http://localhost:3000/img/default-avatar.jpg"
-  );
-  const [cover, setCover] = useState(
-    "http://localhost:3000/img/default-avatar.jpg"
-  );
+  const history = useHistory();
+  const [thumbnail, setThumbnail] = useState("");
+  const [cover, setCover] = useState("");
   const [content, setContent] = useState("");
 
   const customUpload = async (type, file) => {
@@ -43,10 +41,10 @@ export default function CreateClass() {
       const form = new FormData();
       form.append("image", file);
       const res = await postUploadImage(form);
-      const { link } = res;
-      if (type == "thumbnail") setThumbnail(link);
-      if (type == "cover") setCover(link);
-      return link;
+      const { content } = res;
+      if (type == "thumbnail") setThumbnail(content);
+      if (type == "cover") setCover(content);
+      return content;
     } catch (err) {
       handleErrorApi(err);
     }
@@ -54,15 +52,16 @@ export default function CreateClass() {
 
   const onFinish = async (values) => {
     try {
-      // if (thumbnail && cover) {
-      const res = await postCreateClass({
-        ...values,
-        thumbnail,
-        cover,
-        content,
-      });
-      notification.success({ message: "Create class successfully!" });
-      // }
+      if (thumbnail && cover) {
+        const res = await postCreateClass({
+          ...values,
+          thumbnail,
+          cover,
+          content,
+        });
+        notification.success({ message: "Create class successfully!" });
+        history.push("/dashboard");
+      }
     } catch (err) {
       handleErrorApi(err);
     }
@@ -167,8 +166,9 @@ export default function CreateClass() {
         <Form.Item label="Thumbnail">
           <ImgCrop aspect={1}>
             <Upload
+              showUploadList={false}
               action={(file) => {
-                customUpload("thumbnal", file);
+                customUpload("thumbnail", file);
               }}
             >
               <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -179,20 +179,31 @@ export default function CreateClass() {
         <Form.Item label="Cover">
           <Upload.Dragger
             multiple={false}
+            showUploadList={false}
             name="files"
             action={(file) => {
               customUpload("cover", file);
             }}
           >
-            <p className="ant-upload-drag-icon">
-              <InboxOutlined />
-            </p>
-            <p className="ant-upload-text">
-              Click or drag file to this area to upload
-            </p>
-            <p className="ant-upload-hint">
-              Support for a single or bulk upload.
-            </p>
+            {cover && (
+              <img
+                src={cover}
+                className="min-w-full min-h-full flex-shrink-0 "
+              />
+            )}
+            {!cover && (
+              <>
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined />
+                </p>
+                <p className="ant-upload-text">
+                  Click or drag file to this area to upload
+                </p>
+                <p className="ant-upload-hint">
+                  Support for a single or bulk upload.
+                </p>
+              </>
+            )}
           </Upload.Dragger>
         </Form.Item>
 

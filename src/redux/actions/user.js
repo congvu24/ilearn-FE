@@ -11,7 +11,8 @@ export const getUser = () => {
     try {
       dispatch(setLoading(true));
       const res = await api.getProfile();
-      dispatch(getProfileSuccess(res));
+      dispatch(getProfileSuccess(res.content));
+      dispatch(setLoading(false));
     } catch (err) {
       dispatch(setLoading(false));
       // if (err && err.response.status == 401) return logout();

@@ -27,7 +27,7 @@ const MyApp = connect(
       {isLoading && (
         <div
           style={{ zIndex: 1000 }}
-          className="min-w-full min-h-full w-full h-full fixed top-0 left-0 bg-dark bg-opacity-40 flex items-center justify-center"
+          className="min-w-full min-h-full w-full h-full fixed top-0 left-0 bg-white bg-opacity-40 flex items-center justify-center"
         >
           <div class="lds-dual-ring"></div>
         </div>

@@ -7,9 +7,13 @@ import HomeSearch from "../component/form/Home-Search";
 import Header from "../component/header/Header";
 import { motion } from "framer-motion";
 import ReactTypingEffect from "react-typing-effect";
+import handleErrorApi from "../utils/handleErrorApi";
+import { getNewClass } from "../api/page";
 
 export default function Homepage() {
   const [isScroll, setScroll] = useState(false);
+  const [data, setData] = useState([]);
+
   const handleScroll = (e) => {
     setScroll(true);
     if (window.scrollY > 5 && isScroll == false) {
@@ -27,6 +31,15 @@ export default function Homepage() {
     return () => document.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(async () => {
+    try {
+      const res = await getNewClass();
+      const { content } = res;
+      setData(content);
+    } catch (err) {
+      handleErrorApi(err);
+    }
+  }, []);
   return (
     <div>
       <motion.div
@@ -210,14 +223,9 @@ export default function Homepage() {
           Lasted classes
         </h3>
         <Row>
-          <ClassCard />
-          <ClassCard />
-          <ClassCard />
-          <ClassCard />
-          <ClassCard />
-          <ClassCard />
-          <ClassCard />
-          <ClassCard />
+          {data.map((item) => (
+            <ClassCard data={item} />
+          ))}
         </Row>
       </motion.div>
       <Footer />

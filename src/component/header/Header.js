@@ -64,14 +64,14 @@ function Header({ user, ...props }) {
             </button>
           </Link>
         )}
-        {user && user.role == "teacher" && (
+        {user && user.Role == 2 && (
           <Link to="/dashboard">
             <button className="px-5 py-1 text-white text-xl font-normal bg-green-500 rounded mx-2 border border-green-500">
               Dashboard
             </button>
           </Link>
         )}
-        {user && user.role == "student" && (
+        {user && user.Role == 1 && (
           <Link to="/profile">
             <button className="px-5 py-1 text-white text-xl font-normal bg-green-500 rounded mx-2 border border-green-500">
               Profile

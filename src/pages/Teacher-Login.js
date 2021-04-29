@@ -1,7 +1,9 @@
 import { Col, Divider, Form, Row } from "antd";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { postLogin } from "../api/user";
 import SmallHeader from "../component/header/SmallHeader";
+import { login } from "../utils/auth";
 import handleErrorApi from "../utils/handleErrorApi";
 
 export default function TeacherLogin() {
@@ -10,7 +12,9 @@ export default function TeacherLogin() {
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      console.log(values);
+      const res = await postLogin(values);
+      const { content } = res;
+      login({ token: content });
     } catch (err) {
       setLoading(false);
       handleErrorApi(err);
@@ -60,7 +64,7 @@ export default function TeacherLogin() {
               <div className="max-w-sm p-4 mx-auto">
                 <Form onFinish={onFinish}>
                   <p className="text-left text-gray-500 my-2">Username:</p>
-                  <Form.Item name="username" rules={[{ required: true }]}>
+                  <Form.Item name="email" rules={[{ required: true }]}>
                     <input
                       autoComplete={false}
                       className="w-full p-3 px-4 rounded max-auto block font-semibold text-base border-l-4 border-blue-500"

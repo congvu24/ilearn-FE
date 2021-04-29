@@ -1,7 +1,7 @@
 import handleApi from "./handleApi";
 
 export const postLogin = (data) =>
-  handleApi({ url: "/login", method: "post", data });
+  handleApi({ url: "/auth/normal ", method: "post", data });
 
 export const postRegister = (data) =>
   handleApi({ url: "/user/create", method: "post", data });
@@ -16,13 +16,14 @@ export const postConnectZoom = ({ token }) =>
     data: { access_code: token },
   });
 
-export const postUploadImage = (data) =>
-  handleApi({
+export const postUploadImage = (data) => {
+  return handleApi({
     url: "/upload",
     method: "post",
     data,
     option: { headers: { "Content-Type": "multipart/form-data" } },
   });
+};
 
 export const postCreateClass = (data) =>
   handleApi({ url: "/teacher/class", method: "post", data });
@@ -33,5 +34,4 @@ export const delCreateClass = (id) =>
 export const getMyClass = () =>
   handleApi({ url: "/teacher/class", method: "get" });
 
-export const getProfile = () =>
-  handleApi({ url: "/me", method: "get" });
+export const getProfile = () => handleApi({ url: "/user/me", method: "get" });

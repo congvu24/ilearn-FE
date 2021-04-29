@@ -11,10 +11,11 @@ import {
 import ListClass from "./teacher/ListClass";
 import CreateClass from "./teacher/CreateClass";
 import DropdownMenu from "../component/menu/DropdownMenu";
+import { withAuthSync } from "../utils/auth";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-export default function Dashboard() {
+function Dashboard() {
   return (
     <Layout className="min-h-screen">
       <Sider
@@ -81,3 +82,5 @@ export default function Dashboard() {
     </Layout>
   );
 }
+
+export default withAuthSync(Dashboard);

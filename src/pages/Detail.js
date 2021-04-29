@@ -1,5 +1,5 @@
 import { Affix, Button, Col, Divider, Form, Row } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import ClassCard from "../component/class/ClassCard";
 import Footer from "../component/footer/Footer";
@@ -7,6 +7,10 @@ import Header from "../component/header/Header";
 import gfm from "remark-gfm";
 import ClassComment from "../component/comment/ClassComment";
 import TextArea from "antd/lib/input/TextArea";
+import { useParams } from "react-router";
+import { getClassDetail } from "../api/page";
+import handleErrorApi from "../utils/handleErrorApi";
+import moment from "moment";
 
 const markdown = `
 
@@ -144,7 +148,20 @@ You can reach me and feedback about this
 - 📂 Demo
 - 🌍 Click to demo website
 `;
+
 export default function Homepage() {
+  const [data, setData] = useState("");
+
+  const { id } = useParams();
+  useEffect(async () => {
+    try {
+      const res = await getClassDetail(id);
+      setData(res.content);
+    } catch (err) {
+      handleErrorApi(err);
+    }
+  }, []);
+  if (!data) return null;
   return (
     <div>
       <div
@@ -152,81 +169,66 @@ export default function Homepage() {
         className="hero w-full h-screen  relative overflow-hidden"
       >
         <div className="w-full h-full flex overflow-hidden items-center justify-center absolute top-0 left-0 blur-md filter">
-          <img src="/img/login-cover.jpg" />
+          <img src={data.Cover} />
         </div>
         <Header />
         <div className="absolute w-full h-full bg-black bg-opacity-40 top-0 left-0"></div>
       </div>
       <div className="container mx-auto xl:px-40">
         <div className="transform -translate-y-1/2 md:flex items-start">
-          <div className="mx-auto md:mx-unset w-60 h-60 flex items-center justify-center overflow-hidden ring-4 ring-white flex-shrink-0">
+          <div className="mx-auto md:mx-0 w-60 h-60 flex items-center justify-center overflow-hidden ring-4 ring-white flex-shrink-0">
             <img
-              src="/img/login-cover.jpg"
+              src={data.Thumbnail}
               className="min-w-full min-h-full flex-shink-0"
             />
           </div>
           <div className="hidden md:block p-2 md:p-0 md:ml-4 text-center md:text-left mt-4 md:mt-0">
-            <h2 className="text-4xl filter invert">
-              Javascript full course in 75 minutes
-            </h2>
+            <h2 className="text-4xl filter invert">{data.Topic}</h2>
             <p className=" filter invert font-semibold text-base">
-              Free to join
+              {data.FreeToJoin ? "Free to join" : "Premium"}
             </p>
             <p className=" filter invert font-semibold text-base">
-              <i class="far fa-clock"></i> 7PM-8PM Saturday
+              <i class="far fa-clock"></i>{" "}
+              {moment(data.StartTime).format("lll")}
             </p>
             <p className=" filter invert font-semibold text-base">
-              <i class="fas fa-user-alt"></i> Duong Cong Vu
+              <i class="fas fa-user-alt"></i> {data.Topic}
             </p>
             <p className="mt-4 font-normal text-base text-justify mx-text-left">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
-              adipisci, aliquam recusandae distinctio quam nostrum saepe omnis
-              et accusamus nulla?
+              {data.Description}
             </p>
           </div>
         </div>
         <div className="transform -translate-y-32">
           <div className="block md:hidden p-2 md:p-0 md:ml-4 text-center md:text-left mt-4 md:mt-0 ">
-            <h2 className="text-4xl text-white filter invert">
-              Javascript full course in 75 minutes
-            </h2>
+            <h2 className="text-4xl text-white filter invert">{data.Topic}</h2>
             <p className="filter invert font-normal text-base">Free to join</p>
             <p className=" font-normal text-base">
-              <i class="far fa-clock"></i> 7PM-8PM Saturday
+              <i class="far fa-clock"></i>
+              {moment(data.StartTime).format("lll")}
             </p>
             <p className=" font-normal text-base">
-              <i class="fas fa-user-alt"></i> Duong Cong Vu
+              <i class="fas fa-user-alt"></i> {data.OwnerName}
             </p>
             <p className="mt-4 font-normal text-base text-justify mx-text-left">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
-              adipisci, aliquam recusandae distinctio quam nostrum saepe omnis
-              et accusamus nulla?
+              {data.Description}
             </p>
           </div>
         </div>
         <div className="transform md:-translate-y-40 -translate-y-20 flex items-center md:justify-end justify-center">
           <button className="px-4 mr-2 py-2 uppercase text-green-500 rounded border border-green-500 font-semibold block">
-            79 participants
+            {data.MaxParticipant} participants
           </button>
-          <button className="px-4 mr-2 py-2 uppercase text-white rounded bg-green-400 font-semibold block">
-            JOIN NOW
-          </button>
+          <a target="_blank" href={data.MeetingJoinUrl}>
+            <button className="px-4 mr-2 py-2 uppercase text-white rounded bg-green-400 font-semibold block">
+              JOIN NOW
+            </button>
+          </a>
         </div>
       </div>
       <div className="container mx-auto xl:px-40 py-4 transform -translate-y-10 md:-translate-y-32">
         <article class="prose lg:prose-md max-w-none px-2">
           <ReactMarkdown remarkPlugins={[gfm]} children={markdown} />
-          <h1>Garlic bread with cheese: What the science tells us</h1>
-          <p>
-            For years parents have espoused the health benefits of eating garlic
-            bread with cheese to their children, with the food earning such an
-            iconic status in our culture that kids will often dress up as warm,
-            cheesy loaf for Halloween.
-          </p>
-          <p>
-            But a recent study shows that the celebrated appetizer may be linked
-            to a series of rabies cases springing up around the country.
-          </p>
         </article>
       </div>
       <div className="container mx-auto px-2 xl:px-40 py-4 transform -translate-y-10 md:-translate-y-32">
