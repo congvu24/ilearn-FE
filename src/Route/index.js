@@ -9,6 +9,8 @@ import TeacherLogin from "../pages/Teacher-Login";
 import UserLogin from "../pages/User-Login";
 import { AnimatePresence } from "framer-motion";
 import AuthenToken from "../pages/AuthenToken";
+import AuthenZoom from "../pages/ConnectZoom";
+import UpdateProfile from "../pages/UpdateProfile";
 
 export default function MyRoute() {
   return (
@@ -23,6 +25,14 @@ export default function MyRoute() {
           <Route exact path="/login">
             <SplashRoute key="/login">
               <UserLogin />
+            </SplashRoute>
+          </Route>
+          <Route path="/connect">
+            <AuthenZoom />
+          </Route>
+          <Route exact path="/register/profile">
+            <SplashRoute key="/register">
+              <UpdateProfile />
             </SplashRoute>
           </Route>
           <Route exact path="/register">
@@ -41,7 +51,7 @@ export default function MyRoute() {
             </SplashRoute>
           </Route>
           <Route path="/auth/:token">
-              <AuthenToken />
+            <AuthenToken />
           </Route>
           <Route path="/">
             <SplashRoute key="/">

@@ -5,7 +5,6 @@ import handleErrorApi from "../../utils/handleErrorApi";
 import { postRegister } from "../../api/user";
 import cookie from "js-cookie";
 
-
 export default function RegisterAccount({ nextStep }) {
   const [isLoading, setLoading] = useState(false);
 
@@ -14,8 +13,8 @@ export default function RegisterAccount({ nextStep }) {
       setLoading(true);
       const res = await postRegister(values);
       console.log(res);
-      const { token } = res;
-      cookie.set("userToken", token, { expires: 1 });
+      const { content } = res;
+      cookie.set("userToken", content, { expires: 1 });
 
       // console.log(values);
       nextStep();

@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import { Form, Col, Row, Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import handleErrorApi from "../../utils/handleErrorApi";
-import ImgCrop from 'antd-img-crop';
+import ImgCrop from "antd-img-crop";
+import { postUpdateProfile, postUploadImage } from "../../api/user";
 
 export default function RegisterProfile({ nextStep }) {
   const [isLoading, setLoading] = useState(false);
-  const [avatar, setAvatar] = useState("");
+  const [avatar, setAvatar] = useState(
+    "http://localhost:3000/img/default-avatar.jpg"
+  );
 
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      console.log({ ...values, avatar });
+
+      const res = await postUpdateProfile({ ...values, avatar });
       nextStep();
     } catch (err) {
       setLoading(false);
@@ -19,21 +23,18 @@ export default function RegisterProfile({ nextStep }) {
     }
   };
 
-  const customAction = (file) => {
+  const customAction = async (file) => {
     // uploadImage(file);
-    return new Promise(async (res, rej) => {
-      let src = file.url;
-      if (!src) {
-        src = await new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result);
-        });
-      }
-      if (src) {
-        res(src);
-      }
-    });
+    try {
+      const form = new FormData();
+      form.append("image", file);
+      const res = await postUploadImage(form);
+      const { link } = res;
+      setAvatar(link);
+      return link;
+    } catch (err) {
+      handleErrorApi(err);
+    }
   };
 
   return (
@@ -61,7 +62,7 @@ export default function RegisterProfile({ nextStep }) {
         <Row gutter={12}>
           <Col xs={12}>
             <p className="font-semibold text-gray-700">Full name: </p>
-            <Form.Item name="fullname" rules={[{ required: true }]}>
+            <Form.Item name="nickname" rules={[{ required: true }]}>
               <input
                 className="bg-blue-50 w-full p-3 px-4 rounded max-auto block font-semibold text-base border-l-4 border-blue-500"
                 placeholder="Duong Cong Vu"
@@ -103,7 +104,7 @@ export default function RegisterProfile({ nextStep }) {
           </Col>
         </Row>
         <p className="font-semibold text-gray-700">About your self: </p>
-        <Form.Item className="description" rules={[{ required: true }]}>
+        <Form.Item className="detail" rules={[{ required: true }]}>
           <textarea className="bg-blue-50 w-full p-3 px-4 rounded max-auto block font-semibold text-base border-l-4 border-blue-500" />
         </Form.Item>
         <Form.Item noStyle>

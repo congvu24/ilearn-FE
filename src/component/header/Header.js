@@ -1,12 +1,17 @@
 import { Affix, Dropdown } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import MenuDrawer from "../drawer/MenuDrawer";
 import DropdownMenu from "../menu/DropdownMenu";
+import { getUser } from "../../redux/actions/user";
 
 function Header({ user, ...props }) {
   const [isStick, setIsStick] = useState(false);
+
+  useEffect(() => {
+    props.getUser();
+  }, []);
 
   return (
     // <Affix onChange={() => setIsStick(!isStick)}>
@@ -95,6 +100,8 @@ const mapStateToProps = (state) => ({
   user: state.user.user,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getUser,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

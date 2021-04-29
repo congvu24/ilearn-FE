@@ -7,7 +7,14 @@ export const postRegister = (data) =>
   handleApi({ url: "/user/create", method: "post", data });
 
 export const postUpdateProfile = (data) =>
-  handleApi({ url: "/profile", method: "post", data });
+  handleApi({ url: "/user/update", method: "post", data });
+
+export const postConnectZoom = ({ token }) =>
+  handleApi({
+    url: "/teacher/attach",
+    method: "post",
+    data: { access_code: token },
+  });
 
 export const postUploadImage = (data) =>
   handleApi({
@@ -25,3 +32,6 @@ export const delCreateClass = (id) =>
 
 export const getMyClass = () =>
   handleApi({ url: "/teacher/class", method: "get" });
+
+export const getProfile = () =>
+  handleApi({ url: "/me", method: "get" });

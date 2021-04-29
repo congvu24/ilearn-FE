@@ -39,13 +39,17 @@ export default function CreateClass() {
   const [content, setContent] = useState("");
 
   const customUpload = async (type, file) => {
-    const form = new FormData();
-    form.append("image", file);
-    const res = await postUploadImage(form);
-    const { link } = res;
-    if (type == "thumbnail") setThumbnail(link);
-    if (type == "cover") setCover(link);
-    return link;
+    try {
+      const form = new FormData();
+      form.append("image", file);
+      const res = await postUploadImage(form);
+      const { link } = res;
+      if (type == "thumbnail") setThumbnail(link);
+      if (type == "cover") setCover(link);
+      return link;
+    } catch (err) {
+      handleErrorApi(err);
+    }
   };
 
   const onFinish = async (values) => {
@@ -162,14 +166,24 @@ export default function CreateClass() {
         </Form.Item>
         <Form.Item label="Thumbnail">
           <ImgCrop aspect={1}>
-            <Upload action={customUpload}>
+            <Upload
+              action={(file) => {
+                customUpload("thumbnal", file);
+              }}
+            >
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
           </ImgCrop>
         </Form.Item>
 
         <Form.Item label="Cover">
-          <Upload.Dragger multiple={false} name="files" action="/upload.do">
+          <Upload.Dragger
+            multiple={false}
+            name="files"
+            action={(file) => {
+              customUpload("cover", file);
+            }}
+          >
             <p className="ant-upload-drag-icon">
               <InboxOutlined />
             </p>
