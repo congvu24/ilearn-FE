@@ -104,7 +104,11 @@ export default function RegisterProfile({ nextStep }) {
           </Col>
         </Row>
         <p className="font-semibold text-gray-700">About your self: </p>
-        <Form.Item className="detail" rules={[{ required: true }]}>
+        <Form.Item
+          name="detail"
+          className="detail"
+          rules={[{ required: true }]}
+        >
           <textarea className="bg-blue-50 w-full p-3 px-4 rounded max-auto block font-semibold text-base border-l-4 border-blue-500" />
         </Form.Item>
         <Form.Item noStyle>

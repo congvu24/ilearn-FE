@@ -12,11 +12,11 @@ export default function AuthenZoom() {
   const history = useHistory();
   let query = useQuery();
   const token = query.get("code");
-  history.replace("/register/profile");
   useEffect(async () => {
     try {
       if (token) {
         const res = await postConnectZoom({ token });
+        history.replace("/register/profile");
       }
     } catch (err) {
       handleErrorApi(err);
