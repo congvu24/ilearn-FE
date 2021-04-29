@@ -46,9 +46,11 @@ function Header({ user, ...props }) {
         <Link to="/trending">
           <li className="mx-2 font-normal text-xl text-white">Trending</li>
         </Link>
-        <a onClick={logout}>
-          <li className="mx-2 font-normal text-xl text-white">Log out</li>
-        </a>
+        {user && (
+          <a onClick={logout}>
+            <li className="mx-2 font-normal text-xl text-white">Log out</li>
+          </a>
+        )}
       </ul>
       <div className="hidden md:flex items-center justify-center">
         {!user && (

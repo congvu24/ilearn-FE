@@ -7,6 +7,7 @@ export default function HomeSearch() {
   const [result, setResult] = useState([]);
 
   const handleSearch = async (q) => {
+    if (q.length == 0) setResult([]);
     const res = await postLiveSearch(q);
     const { content } = res;
     setResult(content);
@@ -25,7 +26,7 @@ export default function HomeSearch() {
         </button>
       </div>
       {result && result.length > 0 && (
-        <div className="z-0 w-full bg-white h-40 absolute top-0 left-0 rounded-md pt-16 px-2">
+        <div className="z-0 w-full bg-white  absolute top-0 left-0 rounded-md pt-16 px-2">
           <ul>
             {result.map((item) => (
               <Link to={`/detail/${item.ClassId}`}>

@@ -8,13 +8,12 @@ import { postUpdateProfile, postUploadImage } from "../../api/user";
 export default function RegisterProfile({ nextStep }) {
   const [isLoading, setLoading] = useState(false);
   const [avatar, setAvatar] = useState(
-    "http://localhost:3000/img/default-avatar.jpg"
+    "https://hackathon-ihelloworld.vercel.app/img/default-avatar.jpg"
   );
 
   const onFinish = async (values) => {
     try {
       setLoading(true);
-
       const res = await postUpdateProfile({ ...values, avatar });
       nextStep();
     } catch (err) {
@@ -29,9 +28,9 @@ export default function RegisterProfile({ nextStep }) {
       const form = new FormData();
       form.append("image", file);
       const res = await postUploadImage(form);
-      const { link } = res;
-      setAvatar(link);
-      return link;
+      const { content } = res;
+      setAvatar(content);
+      return content;
     } catch (err) {
       handleErrorApi(err);
     }

@@ -8,10 +8,10 @@ export default function ClassCard({ data }) {
   return (
     <Col xs={24} md={12}>
       <div class="flex flex-wrap overflow-hidden rounded border-2 border-gray-100 mb-4 mx-2 md:mx-2 shadow">
-        <div class="w-2/6 overflow-hidden hidden md:block">
+        <div class="w-2/6 overflow-hidden hidden md:flex items-center justify-center">
           <div
             style={{ maxHeight: 250 }}
-            className="w-full h-full flex items-center justify-center overflow-hidden relative"
+            className="flex-shrink-0 min-w-full min-h-full flex items-center justify-center overflow-hidden relative"
           >
             <img
               src={data?.Thumbnail ?? "/img/default-avatarasd.jpg"}
