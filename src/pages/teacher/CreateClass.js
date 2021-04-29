@@ -30,8 +30,13 @@ const formItemLayout = {
 };
 
 export default function CreateClass() {
-  const [thumbnail, setThumbnail] = useState("");
-  const [cover, setCover] = useState("");
+  const [thumbnail, setThumbnail] = useState(
+    "http://localhost:3000/img/default-avatar.jpg"
+  );
+  const [cover, setCover] = useState(
+    "http://localhost:3000/img/default-avatar.jpg"
+  );
+  const [content, setContent] = useState("");
 
   const customUpload = async (type, file) => {
     const form = new FormData();
@@ -45,10 +50,15 @@ export default function CreateClass() {
 
   const onFinish = async (values) => {
     try {
-      if (thumbnail && cover) {
-        const res = await postCreateClass({ ...values, thumbnail, cover });
-        notification.success({ message: "Create class successfully!" });
-      }
+      // if (thumbnail && cover) {
+      const res = await postCreateClass({
+        ...values,
+        thumbnail,
+        cover,
+        content,
+      });
+      notification.success({ message: "Create class successfully!" });
+      // }
     } catch (err) {
       handleErrorApi(err);
     }
@@ -72,6 +82,7 @@ export default function CreateClass() {
         initialValues={{
           free_to_join: true,
           duration: 40,
+          max_participant: 50,
         }}
       >
         <Form.Item
@@ -100,10 +111,12 @@ export default function CreateClass() {
           </Select>
         </Form.Item>
 
-        <Form.Item label="Max participants" rules={[{ required: true }]}>
-          <Form.Item name="max_participant" noStyle>
-            <InputNumber min={1} max={100} defaultValue={50} />
-          </Form.Item>
+        <Form.Item
+          label="Max participants"
+          name="max_participant"
+          rules={[{ required: true }]}
+        >
+          <InputNumber min={1} max={100} defaultValue={50} />
           <span className="ant-form-text"> people</span>
         </Form.Item>
 
@@ -116,7 +129,11 @@ export default function CreateClass() {
           <Switch defaultChecked={true} />
         </Form.Item>
 
-        <Form.Item name="start" rules={[{ required: true }]} label="Start time">
+        <Form.Item
+          name="start_time"
+          rules={[{ required: true }]}
+          label="Start time"
+        >
           <DatePicker showTime showSecond={false} />
         </Form.Item>
 
@@ -166,7 +183,7 @@ export default function CreateClass() {
         </Form.Item>
 
         <Form.Item label="Content">
-          <MdEditor />
+          <MdEditor content={content} setContent={setContent} />
         </Form.Item>
         <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
           <Button type="primary" htmlType="submit">

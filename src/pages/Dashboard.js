@@ -49,18 +49,14 @@ export default function Dashboard() {
           style={{ padding: 0 }}
         >
           <div className="w-full h-full flex items-center justify-end ">
-            <Dropdown
-              overlay={DropdownMenu}
-              trigger={["click"]}
-              placement="bottomLeft"
-            >
+            {/* <Dropdown overlay={} trigger={["click"]} placement="bottomLeft">
               <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center ml-0 mr-2">
                 <img
                   src="/img/default-avatar.jpg"
                   className="min-w-full min-h-full flex-shrink-0"
                 />
               </div>
-            </Dropdown>
+            </Dropdown> */}
           </div>
         </Header>
         <Content style={{ margin: "24px 16px 0" }}>

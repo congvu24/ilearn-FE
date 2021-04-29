@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Form, Col, Row } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import handleErrorApi from "../../utils/handleErrorApi";
+import { postRegister } from "../../api/user";
+import cookie from "js-cookie";
+
 
 export default function RegisterAccount({ nextStep }) {
   const [isLoading, setLoading] = useState(false);
@@ -9,7 +12,12 @@ export default function RegisterAccount({ nextStep }) {
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      console.log(values);
+      const res = await postRegister(values);
+      console.log(res);
+      const { token } = res;
+      cookie.set("userToken", token, { expires: 1 });
+
+      // console.log(values);
       nextStep();
     } catch (err) {
       setLoading(false);
@@ -43,7 +51,7 @@ export default function RegisterAccount({ nextStep }) {
           <Col xs={12}>
             <p className="font-semibold text-gray-700">Username: </p>
             <Form.Item
-              name="username"
+              name="nickname"
               rules={[
                 {
                   required: true,
@@ -80,7 +88,7 @@ export default function RegisterAccount({ nextStep }) {
             <p className="font-semibold text-gray-700">Confirm: </p>
 
             <Form.Item
-              name="confirm"
+              name="passwordTwo"
               rules={[
                 {
                   required: true,

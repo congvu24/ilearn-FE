@@ -40,7 +40,7 @@ export default function MyRoute() {
               <Dashboard />
             </SplashRoute>
           </Route>
-          <Route path="/authen/:token">
+          <Route path="/auth/:token">
               <AuthenToken />
           </Route>
           <Route path="/">

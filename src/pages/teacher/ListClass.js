@@ -1,5 +1,7 @@
 import { Table, Tag, Space } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getMyClass } from "../../api/user";
+import handleErrorApi from "../../utils/handleErrorApi";
 
 export default function ListClass() {
   const columns = [
@@ -61,30 +63,15 @@ export default function ListClass() {
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"],
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      age: 42,
-      address: "London No. 1 Lake Park",
-      tags: ["loser"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-  ];
-
+  const [data, setData] = useState([]);
+  useEffect(async () => {
+    try {
+      const res = await getMyClass();
+      setData(res);
+    } catch (err) {
+      handleErrorApi(err);
+    }
+  });
   return (
     <div>
       <Table columns={columns} dataSource={data} />
