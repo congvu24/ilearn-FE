@@ -12,7 +12,7 @@ export default function Homepage() {
   const [isScroll, setScroll] = useState(false);
   const handleScroll = (e) => {
     setScroll(true);
-    if (window.scrollY > 20 && isScroll == false) {
+    if (window.scrollY > 5 && isScroll == false) {
       setTimeout(() => {
         window.scrollTo(0, 0);
       }, 0.25);

@@ -60,22 +60,11 @@ export default function UserLogin() {
                   tenetur assumenda vitae provident!
                 </p>
                 <div className="max-w-sm p-4 mx-auto">
-                  <FacebookLogin
-                    appId="309379057451049"
-                    autoLoad={false}
-                    fields="name,email,picture"
-                    // onClick={componentClicked}
-                    callback={responseFacebook}
-                    render={(renderProps) => (
-                      <button
-                        onClick={renderProps.onClick}
-                        className="w-full p-3 px-4 rounded-full max-auto bg-blue-500 block my-4 text-white font-semibold text-base uppercase"
-                      >
-                        <i class="fab fa-facebook-f mr-4"></i> Facebook
-                      </button>
-                    )}
-                  />
-
+                  <a href="https://tao-learn.herokuapp.com/auth/facebook">
+                    <button className="w-full p-3 px-4 rounded-full max-auto bg-blue-500 block my-4 text-white font-semibold text-base uppercase">
+                      <i class="fab fa-facebook-f mr-4"></i> Facebook
+                    </button>
+                  </a>
                   <button className="w-full p-3 px-4 rounded-full max-auto bg-red-500 block my-4 text-white font-semibold text-base uppercase">
                     <i class="fab fa-google mr-4"></i> Google
                   </button>

@@ -8,6 +8,7 @@ import Homepage from "../pages/Homepage";
 import TeacherLogin from "../pages/Teacher-Login";
 import UserLogin from "../pages/User-Login";
 import { AnimatePresence } from "framer-motion";
+import AuthenToken from "../pages/AuthenToken";
 
 export default function MyRoute() {
   return (
@@ -38,6 +39,9 @@ export default function MyRoute() {
             <SplashRoute key="/dashboard">
               <Dashboard />
             </SplashRoute>
+          </Route>
+          <Route path="/authen/:token">
+              <AuthenToken />
           </Route>
           <Route path="/">
             <SplashRoute key="/">

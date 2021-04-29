@@ -48,7 +48,7 @@ export default function Dashboard() {
           className="site-layout-sub-header-background"
           style={{ padding: 0 }}
         >
-          <div className="w-full h-full flex items-center justify-end">
+          <div className="w-full h-full flex items-center justify-end ">
             <Dropdown
               overlay={DropdownMenu}
               trigger={["click"]}

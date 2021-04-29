@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 
 const { Step } = Steps;
 export default function CreateTeacher() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(3);
 
   const nextStep = () => {
     setStep(step + 1);

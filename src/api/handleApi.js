@@ -8,7 +8,6 @@ const BASE_API = process.env.REACT_APP_BASE_HOST;
 export default async function callApi({ url, method, data, option }) {
   const token = cookie.get("userToken") ?? "";
   return new Promise((resolve, reject) => {
-    store.dispatch(setLoading(true));
     axios({
       method,
       url: `${BASE_API}${url}`,
@@ -17,11 +16,9 @@ export default async function callApi({ url, method, data, option }) {
       // ...option,
     })
       .then((res) => {
-        store.dispatch(offLoading());
         resolve(res.data);
       })
       .catch((err) => {
-        store.dispatch(offLoading());
         reject(err);
       });
   });

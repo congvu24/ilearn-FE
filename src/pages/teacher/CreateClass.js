@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Form,
   Select,
@@ -14,8 +14,13 @@ import {
   Col,
   Input,
   DatePicker,
+  notification,
 } from "antd";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import MdEditor from "../../component/form/MdEditor";
+import ImgCrop from "antd-img-crop";
+import { postCreateClass, postUploadImage } from "../../api/user";
+import handleErrorApi from "../../utils/handleErrorApi";
 
 const { Option } = Select;
 
@@ -25,15 +30,28 @@ const formItemLayout = {
 };
 
 export default function CreateClass() {
-  const normFile = (e) => {
-    console.log("Upload event:", e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
+  const [thumbnail, setThumbnail] = useState("");
+  const [cover, setCover] = useState("");
+
+  const customUpload = async (type, file) => {
+    const form = new FormData();
+    form.append("image", file);
+    const res = await postUploadImage(form);
+    const { link } = res;
+    if (type == "thumbnail") setThumbnail(link);
+    if (type == "cover") setCover(link);
+    return link;
   };
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
+    try {
+      if (thumbnail && cover) {
+        const res = await postCreateClass({ ...values, thumbnail, cover });
+        notification.success({ message: "Create class successfully!" });
+      }
+    } catch (err) {
+      handleErrorApi(err);
+    }
     console.log("Received values of form: ", values);
   };
 
@@ -52,12 +70,12 @@ export default function CreateClass() {
         {...formItemLayout}
         onFinish={onFinish}
         initialValues={{
-          is_free: true,
+          free_to_join: true,
           duration: 40,
         }}
       >
         <Form.Item
-          name="name"
+          name="topic"
           label="Name"
           rules={[{ required: true, message: "Please input the name!" }]}
         >
@@ -83,7 +101,7 @@ export default function CreateClass() {
         </Form.Item>
 
         <Form.Item label="Max participants" rules={[{ required: true }]}>
-          <Form.Item name="max_number" noStyle>
+          <Form.Item name="max_participant" noStyle>
             <InputNumber min={1} max={100} defaultValue={50} />
           </Form.Item>
           <span className="ant-form-text"> people</span>
@@ -91,7 +109,7 @@ export default function CreateClass() {
 
         <Form.Item
           rules={[{ required: true }]}
-          name="is_free"
+          name="free_to_join"
           label="Free to join"
           valuePropName="checked"
         >
@@ -126,9 +144,11 @@ export default function CreateClass() {
           <Input.TextArea />
         </Form.Item>
         <Form.Item label="Thumbnail">
-          <Upload name="logo" action="/upload.do" listType="picture">
-            <Button icon={<UploadOutlined />}>Click to upload</Button>
-          </Upload>
+          <ImgCrop aspect={1}>
+            <Upload action={customUpload}>
+              <Button icon={<UploadOutlined />}>Click to upload</Button>
+            </Upload>
+          </ImgCrop>
         </Form.Item>
 
         <Form.Item label="Cover">
@@ -146,11 +166,7 @@ export default function CreateClass() {
         </Form.Item>
 
         <Form.Item label="Content">
-          <div
-            contentEditable={true}
-            style={{ minHeight: 200 }}
-            className="w-full bg-gray-50 border-dotted border p-4 mx-auto"
-          ></div>
+          <MdEditor />
         </Form.Item>
         <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
           <Button type="primary" htmlType="submit">
