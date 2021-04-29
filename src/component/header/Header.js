@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import MenuDrawer from "../drawer/MenuDrawer";
 import DropdownMenu from "../menu/DropdownMenu";
 import { getUser } from "../../redux/actions/user";
+import { logout } from "../../utils/auth";
 
 function Header({ user, ...props }) {
   const [isStick, setIsStick] = useState(false);
@@ -45,9 +46,9 @@ function Header({ user, ...props }) {
         <Link to="/trending">
           <li className="mx-2 font-normal text-xl text-white">Trending</li>
         </Link>
-        <Link to="/about">
-          <li className="mx-2 font-normal text-xl text-white">About us</li>
-        </Link>
+        <a onClick={logout}>
+          <li className="mx-2 font-normal text-xl text-white">Log out</li>
+        </a>
       </ul>
       <div className="hidden md:flex items-center justify-center">
         {!user && (
